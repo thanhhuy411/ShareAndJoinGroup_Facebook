@@ -49,19 +49,21 @@ namespace Page_Face.UI
 
             //Viet code Dang nhap o day
            
-            browser.Navigate().GoToUrl("https://www.facebook.com/");
+            browser.Navigate().GoToUrl("https://mbasic.facebook.com/");
 
 
             Thread.Sleep(2000);
-            browser.FindElement(By.Id("email")).SendKeys(Email);
+            browser.FindElement(By.Id("m_login_email")).SendKeys(Email);
             Thread.Sleep(500);
-            browser.FindElement(By.Id("pass")).SendKeys(Password);
+            browser.FindElement(By.Name("pass")).SendKeys(Password);
             Thread.Sleep(500);
             browser.FindElement(By.Name("login")).Click();
             Thread.Sleep(2000);
-                string checklogin= browser.FindElement(By.ClassName("_9ay7")).Text;
+                // string checklogin= browser.FindElement(By.ClassName("r")).Text;
+               
                 try
                 {
+                    var checklogin = browser.FindElement(By.Name("login"));
                     if (checklogin!=null)
                     {
                         browser.Close();
@@ -72,7 +74,7 @@ namespace Page_Face.UI
                 catch (Exception)
                 {
 
-                    throw;
+                 
                 }
                 
                 
@@ -80,11 +82,12 @@ namespace Page_Face.UI
             string faCode = DR_Get2FACodeHelper.Get2FA(_2FA);
             browser.FindElement(By.Id("approvals_code")).SendKeys(faCode);
             Thread.Sleep(2000);
-            browser.FindElement(By.Id("checkpointSubmitButton")).Click();
+            browser.FindElement(By.Id("checkpointSubmitButton-actual-button")).Click();
             Thread.Sleep(2000);
-                string check2fa = browser.FindElement(By.ClassName("_3-8y _50f4")).Text;
                 try
                 {
+                    var check2fa = browser.FindElement(By.ClassName("approvals_code"));
+
                     if (check2fa!=null)
                     {
                         browser.Close();
@@ -95,9 +98,9 @@ namespace Page_Face.UI
                 catch (Exception)
                 {
 
-                    throw;
+                   
                 }
-                browser.FindElement(By.Id("checkpointSubmitButton")).Click();
+                browser.FindElement(By.Id("checkpointSubmitButton-actual-button")).Click();
                 Thread.Sleep(2000);
                 //Dang nhap xong thi dong browser vao la xong
                 browser.Close();
