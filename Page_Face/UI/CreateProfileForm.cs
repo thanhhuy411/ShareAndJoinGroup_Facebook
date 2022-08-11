@@ -59,11 +59,44 @@ namespace Page_Face.UI
             Thread.Sleep(500);
             browser.FindElement(By.Name("login")).Click();
             Thread.Sleep(2000);
+                string checklogin= browser.FindElement(By.ClassName("_9ay7")).Text;
+                try
+                {
+                    if (checklogin!=null)
+                    {
+                        browser.Close();
+                        browser.Quit();
+                        continue;
+                    }
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+                
+                
+             
             string faCode = DR_Get2FACodeHelper.Get2FA(_2FA);
             browser.FindElement(By.Id("approvals_code")).SendKeys(faCode);
             Thread.Sleep(2000);
             browser.FindElement(By.Id("checkpointSubmitButton")).Click();
             Thread.Sleep(2000);
+                string check2fa = browser.FindElement(By.ClassName("_3-8y _50f4")).Text;
+                try
+                {
+                    if (check2fa!=null)
+                    {
+                        browser.Close();
+                        browser.Quit();
+                        continue;
+                    }
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
                 browser.FindElement(By.Id("checkpointSubmitButton")).Click();
                 Thread.Sleep(2000);
                 //Dang nhap xong thi dong browser vao la xong
