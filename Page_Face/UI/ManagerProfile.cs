@@ -121,8 +121,29 @@ namespace Page_Face.UI
                     brower.FindElement(By.CssSelector("input[aria-label='Search for groups'][placeholder='Search for groups']")).SendKeys(gr);
                     Thread.Sleep(2000);
                     string grTemp = "//*[.=\"" + gr + "\"]";
-                    var SpanTag3 = brower.FindElement(By.XPath(grTemp));
-                    SpanTag3.Click();
+                    string checjkpoint_share = "true";
+                    try
+                    {
+                        var SpanTag3 = brower.FindElement(By.XPath(grTemp));
+                        if (SpanTag3!=null)
+                        {
+                            SpanTag3.Click();
+                        }
+                        else
+                        {
+                            checjkpoint_share="false";
+                            brower.Navigate().GoToUrl(link);
+                            Thread.Sleep(2000);
+                            continue;
+                        }
+                       
+                    }
+                    catch (Exception)
+                    {
+
+                        
+                    }
+                  
                     Thread.Sleep(1000);
                     var SpanTag4 = brower.FindElement(By.XPath("//*[.=\"Post\"]"));
                     SpanTag4.Click();

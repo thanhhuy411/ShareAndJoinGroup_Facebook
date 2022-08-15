@@ -59,13 +59,25 @@ namespace Page_Face.UI
             Thread.Sleep(500);
             browser.FindElement(By.Name("login")).Click();
             Thread.Sleep(2000);
+              
+                Thread.Sleep(2000);
                 // string checklogin= browser.FindElement(By.ClassName("r")).Text;
-               
+                string checkpoint_username = "true";
+                string checkpoint_password = "true;";
                 try
                 {
                     var checklogin = browser.FindElement(By.Name("login"));
                     if (checklogin!=null)
                     {
+                        var bool_login = browser.FindElement(By.CssSelector("[aria-label='Have you forgotten your password?']"));
+                        if (bool_login!=null)
+                        {
+                            checkpoint_password = "false";
+                        }
+                        else
+                        {
+                            checkpoint_username = "false";
+                        }
                         browser.Close();
                         browser.Quit();
                         continue;
@@ -84,6 +96,7 @@ namespace Page_Face.UI
             Thread.Sleep(2000);
             browser.FindElement(By.Id("checkpointSubmitButton-actual-button")).Click();
             Thread.Sleep(2000);
+                string checkpoint_2fa = "true";
                 try
                 {
                     var check2fa = browser.FindElement(By.ClassName("approvals_code"));
@@ -92,6 +105,7 @@ namespace Page_Face.UI
                     {
                         browser.Close();
                         browser.Quit();
+                        checkpoint_2fa = "false";
                         continue;
                     }
                 }
